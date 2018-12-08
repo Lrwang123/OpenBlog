@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.UserMapper">
+  <select id="login" resultMap="dao.CommonMapper.UserBean">
+	SELECT * FROM user where
+  	<choose>
+  	  <when test="#{0}!=null and #{1}!=null"> username=#{0} AND password=#{1}</when>
+  	  <otherwise>FALSE</otherwise>
+  	</choose>
+  </select>
+  <insert id="register" parameterType="UserBean">
+  	INSERT INTO user 
+  	  (username,password,nickname,sign,sex,email,phone,address,createdate)
+  	  values (#{username},#{password},#{nickname},#{sign},#{sex},#{email},#{phone},#{address},CURRENT_TIMESTAMP())
+  </insert>
+  <select id="isExist" parameterType="String" resultType="int">
+      SELECT count(id) FROM user WHERE ${type} = #{str}
+  </select>
+  
+</mapper>

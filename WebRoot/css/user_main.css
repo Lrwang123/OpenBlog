@@ -1,0 +1,54 @@
+/* 主体1200px,侧边370px,文章区800px，缝隙10px */
+	  body {
+	  	width:1200px; 
+	  	margin:20px auto;
+	  	background-image:url("../image/bg1	.jpg");
+	  }
+	  a:link {color:green;text-decoration:none;}
+	  a:visited {color:green;text-decoration:none;}
+	  a:hover {text-decoration:underline;}
+	  a:active {}
+/* nav区域 */
+	nav {
+	  	margin:20px 10px 0;
+	  	width:1180px;
+	  	font-size:1.3em;
+	}
+	nav .left {
+		float:left;
+	}
+	nav .right {
+		float:right;
+	}
+/* aside区域 */
+	 aside {
+	  	float:left;
+	  	width:330px;
+	  	height:500px;
+	  	margin:20px 0 20px 10px;
+	  	padding:30px 20px 20px;
+	  	background-color:#9AC0CD;
+	  }
+	aside table tr td {
+		width:340px;
+		font-size:2em;
+		text-align:center;
+	}
+	td img {
+		width:150px;
+		height:150px;
+	}
+	aside .button {width:30px; height:30px;}
+/* article区域 */
+	article {
+	  	float:right;
+	  	width:760px;
+	  	min-height:500px;
+	  	margin:20px 10px;
+	  	padding:30px 20px 20px;
+	  	background-color:#8B864E;
+	  }
+	article * {
+		font-size:1.4rem;
+	}
+	article .button {width:25px; height:25px}

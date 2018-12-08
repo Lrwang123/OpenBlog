@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.BlogMapper">
+  <select id="getAllBlogByUserId" resultMap="blogArray">
+  	select * from blog where user_id = #{1}
+  </select>
+  <select id="getAllBlog" resultMap="blogArray">
+  	select * from blog
+  </select>
+  <select id="getBlogByBlogId" parameterType="int" resultMap="blogArray">
+    select * from blog where id = #{1}
+  </select>
+  <select id="getUserByUserId" parameterType="int" resultType="UserBean">
+  	select * from user where id = #{1}
+  </select>
+  <insert id="addBlog">
+  	insert into blog 
+  	  (title,type,info,blog_text,user_id,createdate)
+  	  values (#{blog.title}, #{blog.type}, #{blog.info}, #{blog.blog_text}, #{user_id}, CURRENT_TIMESTAMP())
+  </insert>
+  <update id="UpdateBlog">
+  	update blog 
+  	  set title=#{blog.title}, type=#{blog.type}, info=#{blog.info}, blog_text=#{blog.blog_text}
+  	  where id=#{blog.id} AND user_id=#{user_id}
+  </update>
+  <delete id="delete">
+  	delete from blog where id=#{0} AND user_id=#{1}
+  </delete>
+  <insert id="addMessage" parameterType="MessageBean">
+    INSERT INTO blog_message (blog_id, user_id, text, createdate) values
+      (#{blogId}, #{userId}, #{text}, CURRENT_TIMESTAMP())
+  </insert>
+  <update id="deleteMessage" parameterType="int"> <!-- 删除本人文章下或本人发表的留言 -->
+  	UPDATE blog_message
+  	  SET status=0 
+  	  where id=#{id}
+  	    and (user_id=#{userId} OR blog_id in (select id from blog where user_id = #{userId}))
+  </update>
+  <select id="getMessagesByBlogId" resultType="MessageBean">
+  	SELECT 
+  	  id,
+  	  blog_id as blogId,
+  	  user_id as userId,
+  	  text,
+  	  status,
+  	  createdate
+  	  FROM blog_message WHERE blog_id=#{blogId} AND status=1
+  </select>
+  
+  <resultMap id="blogArray" type="domain.BlogBean">
+        <id column="id" property="id" />
+        <result column="title" property="title" />
+        <result column="type" property="type" />
+        <result column="info" property="info" />
+        <result column="blog_text" property="blog_text" />
+        <result column="user_id" property="userID" />
+        <result column="createdate" property="createDate" />
+        <association property="author" column=""></association>
+    </resultMap>
+</mapper>
