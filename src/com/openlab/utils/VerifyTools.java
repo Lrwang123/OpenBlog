@@ -1,6 +1,6 @@
 package com.openlab.utils;
 
-import exception.FormatErrorException;
+import com.openlab.exception.FormatErrorException;
 
 public final class VerifyTools {
 	// 格式正确时返回true，错误是抛出错误异常

@@ -44,11 +44,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       	  </colgroup>
       	    <tr>
       	  	  <td>用户名:</td>
-      	  	  <td><input type="text" id="usernameInput" name="username" value="<%=(request.getAttribute("username") == null) ? "" : request.getAttribute("username")%>"><span id="usernameMsg"></span></td>
+      	  	  <td><input type="text" id="usernameInput" name="username" value="${username }"><span id="usernameMsg"></span></td>
       	    </tr>
       	    <tr>
       	  	  <td>密码:</td>
-      	  	  <td><input type="password" id="passwordInput" name="password"><span id="passwordMsg"><%="fail".equals(request.getAttribute("status")) ? "账号或密码错误" : "" %></span></td>
+      	  	  <td><input type="password" id="passwordInput" name="password"><span id="passwordMsg">${status }</span></td>
       	    </tr>
       	    <tr>
       	      <td colspan="2"><input type="submit" value="登陆"></td>

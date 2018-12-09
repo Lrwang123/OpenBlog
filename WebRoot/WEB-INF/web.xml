@@ -10,6 +10,24 @@
   </welcome-file-list>
   
   <servlet>
+  	<servlet-name>dispatcher</servlet-name>
+  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  	<load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>dispatcher</servlet-name>
+  	<url-pattern>/</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.js</url-pattern>
+        <url-pattern>*.css</url-pattern>
+        <url-pattern>*.jpg</url-pattern>
+        <url-pattern>*.png</url-pattern>
+    </servlet-mapping>
+  
+  <!-- <servlet>
   	<servlet-name>userServlet</servlet-name>
   	<servlet-class>servlet.UserServlet</servlet-class>
   	<load-on-startup>1</load-on-startup>
@@ -34,8 +52,8 @@
   <servlet-mapping>
   	<servlet-name>AdminServlet</servlet-name>
   	<url-pattern>/admin/*</url-pattern>
-  </servlet-mapping>
-  <filter>
+  </servlet-mapping> -->
+  <!-- <filter>
   	<filter-name>CharsetFilter</filter-name>
   	<filter-class>filter.CharsetFilter</filter-class>
   </filter>
@@ -51,6 +69,6 @@
   	<filter-name>LoginStatusFilter</filter-name>
   	<url-pattern>/user/main</url-pattern>
   	<url-pattern>/blog/*</url-pattern>
-  </filter-mapping>
+  </filter-mapping> -->
    
 </web-app>
