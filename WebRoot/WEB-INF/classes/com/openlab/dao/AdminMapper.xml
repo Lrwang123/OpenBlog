@@ -14,7 +14,7 @@
 			</choose>
 	</select>
 	
-	<select id="getUserList" resultMap="com.openlab.dao.CommonMapper.UserBean">
+	<select id="getUserList" resultMap="com.openlab.dao.CommonDao.UserBean">
 		SELECT * FROM user WHERE status!=3;
 	</select>
 	

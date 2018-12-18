@@ -1,21 +1,26 @@
 package com.openlab.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.openlab.domain.UserBean;
 import com.openlab.service.AdminService;
 
 @Controller
 @RequestMapping("/admin")
+@SessionAttributes(names={"admin"})
 public class AdminController {
 	
-	@Autowired
+	@Autowired(required=true)
 	@Qualifier("adminServiceImpl")
 	private AdminService adminService;
 	
@@ -25,35 +30,44 @@ public class AdminController {
 	}
 
 	@RequestMapping("/login")
-	public ModelAndView login(HttpServletRequest req) {
-		String action = req.getParameter("action");
+	public ModelAndView login(String action, String username, String password) {
+		
+		ModelAndView mv = new ModelAndView();
 		if ("login".equals(action)){
-			boolean res = adminService.login(req);
-			if (res){
-				return new ModelAndView("redirect:main");
+			int res = adminService.login(username, password);
+			if (res > 0){
+				mv.addObject("admin","admin");
+				mv.setViewName("redirect:main");
+				return mv;
 			} else {
-				ModelAndView mv = new ModelAndView("admin_login");
+				mv.setViewName("admin_login");
 				mv.addObject("status", "密码错误");
-				mv.addObject("username", req.getParameter("username"));
+				mv.addObject("username", username);
 				return mv;
 			}
 		} else {
-			return new ModelAndView("admin_login");
+			mv.setViewName("admin_login");
+			return mv;
 		}
 	}
 	
 	@RequestMapping("/main")
-	public void main() {
-		
+	public ModelAndView main() {
+		ModelAndView mv = new ModelAndView("admin_main");
+		List<UserBean> userList = adminService.getUserList();
+		mv.addObject("userList", userList);
+		return mv;
 	}
 	
 	@RequestMapping("/ban")
-	public void ban() {
-		
+	public ModelAndView ban(HttpServletRequest req) {
+		adminService.ban(req.getParameter("id"));
+		return new ModelAndView("redirect:main");
 	}
 	
 	@RequestMapping("/unban")
-	public void unban() {
-		
+	public ModelAndView unban(HttpServletRequest req) {
+		adminService.unban(req.getParameter("id"));
+		return new ModelAndView("redirect:main");
 	}
 }

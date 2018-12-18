@@ -4,16 +4,33 @@ import java.io.Serializable;
 
 public class UserBean implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String username;
 	private String password;
 	private String nickname;
 	private String sign;
 	private String sex;
+	public UserBean(int id, String username, String password, String nickname,
+			String sign, String sex, String email, String phone,
+			String address, int status) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.nickname = nickname;
+		this.sign = sign;
+		this.sex = sex;
+		this.email = email;
+		this.phone = phone;
+		this.address = address;
+		this.status = status;
+	}
 	private String email;
 	private String phone;
 	private String address;
 	private int status;
+	
 	public int getStatus() {
 		return status;
 	}

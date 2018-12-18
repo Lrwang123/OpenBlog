@@ -48,13 +48,16 @@
 		<property name="maxWait" value="${maxWait}"></property>
 	</bean>
 
-	<!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
+	<!-- sqlSessionFactory配置 -->
+	<!-- SqlSessionFactoryBean实现了FactoryBean接口,实际返回的是.getObject()即SqlSessionFactory -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<!-- 自动扫描mapping.xml文件 -->
 		<property name="mapperLocations" value="classpath:com/openlab/dao/*.xml"></property>
 		<!-- mapper.xml type不用写全路径 -->
-		<property name="typeAliasesPackage" value="com.openlab.domain" />  
+		<property name="typeAliasesPackage" value="com.openlab.domain" />
+		<!-- 加载Mybatis配置文件 主要是延迟加载部分 --> 
+		<property name="configLocation" value="classpath:mybatis_conf.xml" />
 	</bean>
 
 	<!-- DAO接口所在包名，Spring会自动查找其下的类 存放dao接口 -->
@@ -63,4 +66,13 @@
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
 	</bean>
 	
+	<!-- 请求信息转换器,负责读取和写入json格式的数据 -->
+	<!-- <bean id="mappingJackson2HttpMessageConverter"
+	class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>application/json;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean> -->
 </beans>

@@ -33,7 +33,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </style>
   </head>
   <body>
-    <nav id="nav1"><a href="<%=basePath %>">返回首页</a>&gt;&gt;登陆&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<%=basePath %>/admin/login">管理员登陆</a></nav>
+    <nav id="nav1">
+    	<a href="<%=basePath %>">返回首页</a>&gt;&gt;登陆&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    	<a href="<%=basePath %>/admin/login">管理员登陆</a>
+    	<div style="float:right;"><a href="user/register">注册</a></div>
+    </nav>
     <div id="main">
       <form method="post" action="user/login" onsubmit="return isOK">
       	<input type="hidden" name="action" value="login">

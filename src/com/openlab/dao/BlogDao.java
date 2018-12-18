@@ -3,11 +3,13 @@ package com.openlab.dao;
 import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import com.openlab.domain.BlogBean;
 import com.openlab.domain.MessageBean;
 import com.openlab.domain.UserBean;
 
+@Repository("blogDao")
 public interface BlogDao {
 	
 	public ArrayList<BlogBean> getAllBlogByUserId(int id);

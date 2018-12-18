@@ -11,14 +11,14 @@ $(document).ready(function(){
 		var msg = $("#usernameMsg");
 		$.ajax({
 			type:"post",
-			url:"user/ajaxVerify",
+			url:"user/registerAjaxVerify",
 			data:"type=username&str="+input.val(),
 			beforeSend:function(){
 				msg.css("color","black");
 				msg.text("查询中");
 			},
 			success:function(meg){
-				var res = JSON.parse(meg);
+				var res = meg;
 				msg.css("color",res.valid ? "green" : "red");
 				msg.text(res.message);
 			}

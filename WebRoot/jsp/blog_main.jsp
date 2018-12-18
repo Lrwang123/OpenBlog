@@ -21,7 +21,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     <c:set var="isOwner" value="${user.id == owner.id }"></c:set><!-- 放置访问者是否是本人的变量isOwner -->
-    
+    <c:out value="session woner id:${sessionScope.owner.id }" />
+    <br>
+    <c:out value="reqiest owner id:${requestScope.owner.id } ${sessionScope.user.username }" />
+    <br>	
+    <c:out value="session user id:${sessionScope.user.id } ${sessionScope.user.username }"/>
+    <br>
+    <c:out value="request user id:${requestScope.user.id }" />
   	<nav> <!-- 导航栏 -->
   	  <c:choose> 
   	    <c:when test="${isOwner }"> <!-- 当是本人的时候 -->
@@ -58,7 +64,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	</aside>
   	
   	<article> <!-- 文章区域 -->
-  	  <c:if test="${fn:length(requestScope.blog_list) == 0 }" var="flag1"> 太懒了，一篇文章都没有~~</c:if>
+  	  <c:if test="${fn:length(blog_list) == 0 }" var="flag1"> 太懒了，一篇文章都没有~~</c:if>
   	  <c:if test="${not flag1 }">
   	  <ul>
   	   	<c:forEach items="${blog_list }" var="blog">

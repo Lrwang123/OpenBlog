@@ -1,28 +1,33 @@
- var isOK = true;
+var isOK = true;
  
- $(document).ready(function(){
-	 $("#usernameInput").blur(function(){
-		 var input = $("#usernameInput");
-		 var msg = $("#usernameMsg");
-	 	 $.ajax({
+$(document).ready(function(){
+	
+	$("#usernameInput").blur(function(){
+		var input = $("#usernameInput");
+		var msg = $("#usernameMsg");
+	 	$.ajax({
 	 		type:"post",
-	 		url:"user/ajaxVerify",
-	 		data:"type=loginUsername&str="+input.val(),
+	 		url:"user/loginAjaxVerify",
+	 		data:"type=username&str="+input.val(),
 	 		success:function(meg){
-	 			var res = JSON.parse(meg);
-	 			if(true==res.valid){
+	 			if("exist"==meg){
 	 				isOK = true;
 	 				msg.hide();
 	 			} else {
 	 				isOK = false;
-	 				msg.text("该用户名不存在！");
+	 				msg.text("该用户不存在！");
 	 				msg.css("color","red");
 	     			msg.show();
-	     			};
-	     		},
-	     	});
-	 });
-	 $("#passwordInput").focus(function(){
-		 $("#passwordMsg").hide();
-	 });
+	     		};
+	 		},
+	 	});
+	});
+	 
+	$("#passwordInput").focus(function(){
+		$("#passwordMsg").hide();
+	});
+	 
+	$("#usernameInput").focus(function(){
+		$("#usernameMsg").hide();
+	});
 });

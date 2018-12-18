@@ -11,7 +11,7 @@
   	<result property="email" column="email"></result>
   	<result property="phone" column="phone"></result>
   	<result property="address" column="address"></result>
-  	<collection property="blogs" column="id" ofType="BlogBean" select="dao.BlogMapper.getAllBlogByUserId"></collection>
+  	<collection property="blogs" column="id" ofType="BlogBean" select="com.openlab.dao.BlogDao.getAllBlogByUserId"></collection>
   </resultMap>
   
   <resultMap type="BlogBean" id="BlogBean">
@@ -23,8 +23,8 @@
     <result column="user_id" property="userID" />
     <result column="createdate" property="createDate" />
     <result column="status" property="status" />
-    <association property="author" column="user_id" javaType="UserBean" select="dao.BlogMapper.getUserByUserId"></association>
-    <collection property="messages" column="id" ofType="MessageBean" select="dao.BlogMapper.getMessagesByBlogId"/>
+    <association property="author" column="user_id" javaType="UserBean" select="com.openlab.dao.BlogDao.getUserByUserId"></association>
+    <collection property="messages" column="id" ofType="MessageBean" select="com.openlab.dao.BlogDao.getMessagesByBlogId"/>
   </resultMap>
     
   <resultMap type="MessageBean" id="MessageBean">
@@ -34,6 +34,6 @@
   	<result property="text" column="text"/>
   	<result property="status" column="status"/>
   	<result property="createdate" column="createdate"/>
-  	<association property="author" column="user_id" javaType="UserBean" select="dao.BlogMapper.getUserByUserId"/>
+  	<association property="author" column="user_id" javaType="UserBean" select="com.openlab.dao.BlogDao.getUserByUserId"/>
    </resultMap>
 </mapper>
