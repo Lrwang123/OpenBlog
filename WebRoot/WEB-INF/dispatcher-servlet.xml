@@ -4,31 +4,49 @@
     xmlns:p="http://www.springframework.org/schema/p"
     xmlns:context="http://www.springframework.org/schema/context"
     xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
     xsi:schemaLocation="http://www.springframework.org/schema/beans
-           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
            http://www.springframework.org/schema/context
-           http://www.springframework.org/schema/context/spring-context-2.5.xsd
-           http://www.springframework.org/schema/aop 
-           http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+           http://www.springframework.org/schema/context/spring-context-4.3.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+           http://www.springframework.org/schema/tx 
+           http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+           http://www.springframework.org/schema/mvc  
+     	   http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
 	
+	<!-- IoC容器配置 -->
 	<!--  开启注解  注解所需要bean会自动创建  -->
 	<context:annotation-config />
-	
 	<!-- 开启组件扫描 -->
 	<context:component-scan base-package="com.openlab" />
 	
+	
+	<!-- MVC配置 -->
+	<!-- 开启SpringMVC的注解 -->
+	<mvc:annotation-driven/>
 	<!-- 配置视图解析器 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	   <property name="prefix" value="/jsp/" />
 	   <property name="suffix" value=".jsp" />
 	</bean>
+	<!-- 拦截器配置 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/blog/*"/>
+			<bean class="com.openlab.interceptor.PermissionInterceptor" />
+		</mvc:interceptor>
+		</mvc:interceptors>
 	
+		
+	<!-- Mybatis配置 -->	
 	<!-- 引入配置文件 -->
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location" value="classpath:jdbc.properties" />
 	</bean>
-	
 	<!-- 数据源 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
@@ -47,7 +65,6 @@
 		<!-- 获取连接最大等待时间 -->
 		<property name="maxWait" value="${maxWait}"></property>
 	</bean>
-
 	<!-- sqlSessionFactory配置 -->
 	<!-- SqlSessionFactoryBean实现了FactoryBean接口,实际返回的是.getObject()即SqlSessionFactory -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -59,20 +76,11 @@
 		<!-- 加载Mybatis配置文件 主要是延迟加载部分 --> 
 		<property name="configLocation" value="classpath:mybatis_conf.xml" />
 	</bean>
-
+	<!-- 自动生成映射器配置 -->
 	<!-- DAO接口所在包名，Spring会自动查找其下的类 存放dao接口 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.openlab.dao" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
 	</bean>
-	
-	<!-- 请求信息转换器,负责读取和写入json格式的数据 -->
-	<!-- <bean id="mappingJackson2HttpMessageConverter"
-	class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-		<property name="supportedMediaTypes">
-			<list>
-				<value>application/json;charset=UTF-8</value>
-			</list>
-		</property>
-	</bean> -->
+
 </beans>

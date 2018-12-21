@@ -1,6 +1,7 @@
 package com.openlab.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class UserBean implements Serializable {
 	
@@ -11,6 +12,15 @@ public class UserBean implements Serializable {
 	private String nickname;
 	private String sign;
 	private String sex;
+	private List<BlogBean> blogs;
+	public List<BlogBean> getBlogs() {
+		return blogs;
+	}
+
+	public void setBlogs(List<BlogBean> blogs) {
+		this.blogs = blogs;
+	}
+
 	public UserBean(int id, String username, String password, String nickname,
 			String sign, String sex, String email, String phone,
 			String address, int status) {

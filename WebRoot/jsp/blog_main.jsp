@@ -1,7 +1,5 @@
 <%@ page language="java" 
  import="java.util.*"
- import="domain.*"
- import="java.sql.Timestamp"
  pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -21,14 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     <c:set var="isOwner" value="${user.id == owner.id }"></c:set><!-- 放置访问者是否是本人的变量isOwner -->
-    <c:out value="session woner id:${sessionScope.owner.id }" />
-    <br>
-    <c:out value="reqiest owner id:${requestScope.owner.id } ${sessionScope.user.username }" />
-    <br>	
-    <c:out value="session user id:${sessionScope.user.id } ${sessionScope.user.username }"/>
-    <br>
-    <c:out value="request user id:${requestScope.user.id }" />
-  	<nav> <!-- 导航栏 -->
+    <nav> <!-- 导航栏 -->
   	  <c:choose> 
   	    <c:when test="${isOwner }"> <!-- 当是本人的时候 -->
 	  	  <div class="left">

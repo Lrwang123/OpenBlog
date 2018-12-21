@@ -3,6 +3,7 @@
     <wb-module deploy-name="OpenBlog">
         <wb-resource deploy-path="/" source-path="/WebRoot"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/sources"/>
         <property name="context-root" value="/OpenBlog"/>
         <property name="java-output-path" value="/OpenBlog/WebRoot/WEB-INF/classes"/>
     </wb-module>

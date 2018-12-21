@@ -55,4 +55,11 @@
 		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
 		<nature>org.eclipse.wst.common.modulecore.ModuleCoreNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>sources</name>
+			<type>2</type>
+			<location>D:/下载/jar/spring-4.3.2/spring-framework-4.3.21.RELEASE分离好的/libs/sources</location>
+		</link>
+	</linkedResources>
 </projectDescription>

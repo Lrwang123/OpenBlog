@@ -13,9 +13,9 @@ public interface AdminService {
 
 	public List<UserBean> getUserList();
 
-	public void ban(String id);
+	public void ban(Integer id);
 
-	public void unban(String id);
+	public void unban(Integer id);
 
 	public int login(String username, String password);
 

@@ -8,7 +8,7 @@
   	select * from blog
   </select>
   <select id="getBlogByBlogId" parameterType="int" resultMap="com.openlab.dao.CommonDao.BlogBean">
-    select * from blog where id = #{1}o.
+    select * from blog where id = #{1}.
   </select>
   <select id="getUserByUserId" parameterType="int" resultMap="com.openlab.dao.CommonDao.UserBean">
   	select * from user where id = #{1}

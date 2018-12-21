@@ -34,6 +34,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       	  <td><textarea rows="20" cols="50" name="blog_text">${old_blog.blog_text }</textarea>
     	</tr>
     	<tr>
+    	  <td><input type="hidden" name="id" value="${old_blog.id }"></td>
+    	  <td><input type="hidden" name="action" value="edit"></td>
     	  <td colspan="2" style="text-align:center;"><input type="submit" value="确认修改"></td>
     	</tr>
       </table>

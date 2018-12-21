@@ -29,13 +29,13 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public void ban(String id) {
-		adminDao.ban(Integer.parseInt(id));
+	public void ban(Integer id) {
+		adminDao.ban(id);
 	}
 
 	@Override
-	public void unban(String id) {
-		adminDao.unban(Integer.parseInt(id));
+	public void unban(Integer id) {
+		adminDao.unban(id);
 	}
 
 	@Override

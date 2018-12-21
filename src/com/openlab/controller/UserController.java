@@ -34,7 +34,7 @@ public class UserController {
 			if (res instanceof UserBean) {
 				UserBean user = (UserBean)res;
 				session.setAttribute("user", user);
-				mv.setViewName("redirect:../blog/main");
+				mv.setViewName("redirect:../blog/blog_main");
 				return mv;
 			} else {
 				mv.setViewName("user_login");
